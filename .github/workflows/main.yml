@@ -34,13 +34,13 @@ jobs:
       - name: list files
         run: |
           ls
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }} .
+      # - name: Build Docker image
+      #   run: |
+      #     docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }} .
 
-      - name: Push Docker image to Docker Hub
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }}
+      # - name: Push Docker image to Docker Hub
+      #   run: |
+      #     docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }}
 
       - name: update run id in the Deployment file
         run: /
