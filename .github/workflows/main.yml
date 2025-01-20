@@ -1,7 +1,6 @@
-
 name: CI/CD Test Pipeline
 
-on: 
+on:
   push:
     branches:
       - main
@@ -20,7 +19,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Checkout kubernetes-repo
         uses: actions/checkout@v4
         with:
@@ -37,15 +36,12 @@ jobs:
           ls
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:{{ github.run_id }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }} .
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:{{ github.run_id }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }}
 
       - name: update run id in the Deployment file
         run: /
-          sed -i 's/latest/{{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
-
-      
-
+          sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
