@@ -1,7 +1,6 @@
-
 name: CI/CD Test Pipeline
 
-on: 
+on:
   push:
     branches:
       - main
@@ -20,7 +19,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Checkout kubernetes-repo
         uses: actions/checkout@v4
         with:
@@ -45,7 +44,5 @@ jobs:
 
       - name: update run id in the Deployment file
         run: /
+          ls ./kubernetes-repo
           sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
-
-      
-
