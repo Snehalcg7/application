@@ -13,9 +13,19 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
+      - name: git-cofig
+        run: |
+          git config --global user.email "snehalcg7@gmail.com"
+          git config --global user.name "Snehalcg7"
 
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Checkout kubernetes-repo
+        uses: actions/checkout@v4
+        with:
+          repository: Snehalcg7/kubernetesfiles
+          path: kubernetes-repo
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -27,10 +37,15 @@ jobs:
           ls
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:{{ github.run_id }} .
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:{{ github.run_id }}
 
-  
+      - name: update run id in the Deployment file
+        run: /
+          sed -i 's/latest/{{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
+
+      
+
