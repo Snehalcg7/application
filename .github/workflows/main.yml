@@ -44,6 +44,8 @@ jobs:
 
       - name: update run id in the Deployment file
         run: /
-          sudo apt-get install tree -y
-          tree ./kubernetes-repo
+          # sudo apt-get install tree -y
+          # tree ./kubernetes-repo
+          ls kubernetes-repo
+          ls kubernetes-repo/files
           sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
