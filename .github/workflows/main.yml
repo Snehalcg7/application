@@ -44,7 +44,6 @@ jobs:
 
       - name: update run id in the Deployment file
         run: /
-          # ls kubernetes-repo
           cd kubernetes-repo
           ls
           # sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
