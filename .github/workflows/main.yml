@@ -48,4 +48,4 @@ jobs:
           # tree ./kubernetes-repo
           ls kubernetes-repo
           ls kubernetes-repo/files
-          sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
+          # sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
