@@ -47,7 +47,7 @@ jobs:
 
       - name: update image tag in the deploymnt file # to sync with argo cd
         run: |
-          sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
+          sed -i 's/first-ci-cd:[0-9]\+/first-ci-cd:${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
 
       - name: push the updated tag changes # push to kubernetes repo
         run: |
