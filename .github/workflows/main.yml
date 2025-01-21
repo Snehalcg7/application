@@ -42,8 +42,8 @@ jobs:
       #   run: |
       #     docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }}
 
-      - name: update run id in the Deployment file
-        run: /
-          cd kubernetes-repo
-          ls
+      - name: list files
+        run: |
+
+          ls kubernetes-repo
           # sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
