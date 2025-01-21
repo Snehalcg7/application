@@ -19,12 +19,15 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_TOKEN  }}
 
       - name: Checkout kubernetes-repo
         uses: actions/checkout@v4
         with:
           repository: Snehalcg7/kubernetesfiles
           path: kubernetes-repo
+          token: ${{ secrets.GH_TOKEN  }}
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
