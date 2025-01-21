@@ -42,6 +42,12 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/first-ci-cd:${{ github.run_id }}
 
-      - name: list files
+      - name: update image tag in the deploymnt file # to sync with argo cd
         run: |
           sed -i 's/latest/${{github.run_id}}/g' ./kubernetes-repo/files/Deployment.yaml
+
+      - name: push the updated tag changes # push to kubernetes repo
+        run: |
+          git -C ./kubernetes-repo add .
+          git -C ./kubernetes-repo commit -m "image tag updated with ${{ github.run_id }}"
+          git -C ./kubernetes-repo push
